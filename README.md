@@ -1,5 +1,5 @@
 # chatbot_tanzania
-Ok, deci am pus chatbot-ul vechi in branch=ul chatbot-old. Acum ne trebuie Python3 si libraria fbchat pe care o luati cu 
+Ok, deci am pus chatbot-ul vechi in branchul chatbot-old. Acum ne trebuie Python3 si libraria fbchat pe care o luati cu 
 
 pip install fbchat
 
