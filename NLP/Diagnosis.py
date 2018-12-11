@@ -4,14 +4,15 @@ class Diagnosis:
         self.symptoms = symptoms
         self.suggestion = suggestion
 
-    def getSuggestion(self):
+    def get_suggestion(self):
         return self.suggestion
 
-    def setMatch(self, probability):
-        self.probability_to_match = probability
+    def probability(self, symptoms):
+        counter = 0
+        for symptom in symptoms:
+            if symptom in self.symptoms:
+                counter += 1
+        return counter / len(self.symptoms) * 100
 
-    def getMatch(self):
-        return self.probability_to_match
-
-    def getSymtoms(self):
+    def get_symptoms(self):
         return self.symptoms
