@@ -12,3 +12,5 @@ def informationRequestedFromUser():
 
 # Uses some information to update the user
 def getRequestedInformation(message):
+
+#test
