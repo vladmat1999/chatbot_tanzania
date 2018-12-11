@@ -124,6 +124,7 @@ def modifyUser(ID, Name=None, Weight=None, Height=None):
         print("A avut loc o eroare")
         return False
 
+#Seteaza campurile user-ului Null
 def setNull(ID, Name=False, Weight=False, Height=False):
     '''
     Seteaza campurile userului respectiv la None. Daca setarea a reusit,
@@ -172,6 +173,28 @@ def setNull(ID, Name=False, Weight=False, Height=False):
     except:
         print("A avut loc o eroare")
         return False
+
+#Verifica daca un user exista
+def userExists(ID):
+    '''
+    Practic getUser() dar modificat sa returneze true/false daca user-ul exista
+    sau nu exista.
+    La orice exceptie returneaza false.
+    
+    :param str/int ID - ID-ul userului pe care vrei sa-l iei
+
+    :return true daca user-ul exista
+            false daca user-ul nu exista
+    '''
+    try:
+        cursor.execute("SELECT * FROM users_info WHERE Id = %s", (int(ID),))
+        if(len(cursor.fetchall()) > 0):
+            return True
+        return False
+    except:
+        print("A aparut o eroare")
+        return False
+    
 
 
     
