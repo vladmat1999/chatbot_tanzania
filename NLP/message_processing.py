@@ -1,5 +1,12 @@
 # Returns a list with the keywords found in the message
-def findKeyWords(message, keywords):
+def findKeyWords(message, keyWords):
+    messageWords = message.split()
+    messageKeyWords = []
+    for keyWord in keyWords:
+        for messageWord in messageWords:
+            if messageWord.lower() == keyWord.lower():
+                messageKeyWords.append(keyWord.lower())
+    return messageKeyWords
 
 # Returns a string representing an answer to the message
 def makeAnswer(message):
