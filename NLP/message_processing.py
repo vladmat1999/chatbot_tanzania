@@ -14,15 +14,17 @@ def find_key_words(message, key_words):
                 message_key_words.append(key_word.lower())
     return message_key_words
 
+
 # Returns a string representing an answer to the message
 def make_answer(message):
-    symptoms = find_key_words(message, ["s1", "s2", "s3", "s4"])
-    typeofmessage = find_key_words(important_words)
-    if("appointment" in typeofmessage):
+    type_of_message = find_key_words(message, important_words)
+    if "appointment" in type_of_message:
         getDoctor(user)
 
+    symptoms = find_key_words(message, ["s1", "s2", "s3", "s4"])
     answer_message = make_suggestion(symptoms)
     return answer_message
+
 
 # Makes a request to receive some data about an event
 def ask_for_information(information, event):
@@ -71,7 +73,7 @@ def most_probable_diagnosis(symptoms):
 
 
 def make_suggestion(symptoms):
-    return most_probable_diagnosis(symptoms).getSuggestion()
+    return most_probable_diagnosis(symptoms).get_suggestion()
 
 
 # Check if we need any more information
@@ -94,5 +96,5 @@ def test_initialize_diagnosis_list():
 
 
 if __name__ == "__main__":
-    print(make_answer("I sometimes fell odd and i have s1 s3 last night", 0))
-    print(make_answer("Today i have seen that my heat s2 and s3", 0))
+    print(make_answer("I sometimes fell odd and i have s1 s3 last night"))
+    print(make_answer("Today i have seen that my heat s2 and s3"))
