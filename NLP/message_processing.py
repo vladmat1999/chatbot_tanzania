@@ -16,10 +16,13 @@ def findKeyWords(message, key_words):
 
 # Returns a string representing an answer to the message
 def makeAnswer(message):
+    medicinenames = findKeyWords(message, )
     symptoms = findKeyWords(message, symptomList)
     typeofmessage = findKeyWords(important_words)
-    if("appointment" in typeofmessage):
-        getDoctor(user)
+    if"appointment" in typeofmessage:
+        return "Contact the doctor at the link to arrange an appointment, he will tell you the time and place: " + getDoctor(user);
+    elif("medicine" in typeofmessage) and ("check" in typeofmessage):
+        if
 
 
     answer_message = makeSuggestion(symptoms)
