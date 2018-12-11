@@ -1,7 +1,7 @@
 from dateutil.parser import parse
 from Diagnosis import Diagnosis
-important_words = ["appointment", "check medicine", ""]
 diagnosis_list = []
+important_words = ["appointment", "medicine", "check"]
 
 
 # Returns a list with the keywords found in the message
@@ -14,21 +14,15 @@ def find_key_words(message, key_words):
                 message_key_words.append(key_word.lower())
     return message_key_words
 
-
-# Analyze the main keyword of the message
-def analyze_key_words(message_kew_words):
-    for key_word in message_kew_words:
-        if key_word in important_words:
-            make_answer(key_word)
-            break
-
-
 # Returns a string representing an answer to the message
-def make_answer(message, user):
+def make_answer(message):
     symptoms = find_key_words(message, ["s1", "s2", "s3", "s4"])
+    typeofmessage = find_key_words(important_words)
+    if("appointment" in typeofmessage):
+        getDoctor(user)
+
     answer_message = make_suggestion(symptoms)
     return answer_message
-
 
 # Makes a request to receive some data about an event
 def ask_for_information(information, event):
