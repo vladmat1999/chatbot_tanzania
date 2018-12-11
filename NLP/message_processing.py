@@ -1,6 +1,7 @@
 from dateutil.parser import parse
-
+from Diagnosis import Diagnosis
 important_words = ["appointment", "check medicine", ""]
+diagnosis_list = testInitializeDiagnosisList()
 
 # Returns a list with the keywords found in the message
 def findKeyWords(message, key_words):
@@ -60,27 +61,32 @@ def getRequestedInformation(message, information, event):
     return 0
 
 
-def mostProbableDiagnosys(symptoms):
-    for diagnosys in diagnosys_list:
+def mostProbableDiagnosis(symptoms):
+    global diagnosis_list
+    for diagnosis in diagnosis_list:
         counter = 0
         for symptom in symptoms:
-            if symptom in diagnosys.getSymtoms():
+            if symptom in diagnosis.getSymtoms():
                 counter += 1
-        diagnosys.setMatch(counter / len(diagnosys_list.getSymtoms()) * 100)
+        diagnosis.setMatch(counter / len(diagnosis_list.getSymtoms()) * 100)
 
-    most_probable_diagnosys = diagnosys_list[0]
+    most_probable_diagnosis = diagnosis_list[0]
 
-    for diagnosys in diagnosys_list:
-        if most_probable_diagnosys.getMatch() < diagnosys.getMatch():
-            most_probable_diagnosys = diagnosys
+    for diagnosis in diagnosis_list:
+        if most_probable_diagnosis.getMatch() < diagnosis.getMatch():
+            most_probable_diagnosis = diagnosis
 
-    return most_probable_diagnosys
+    return most_probable_diagnosis
 
 
 def makeSuggestion(symptoms):
-    return mostProbableDiagnosys(symptoms).getSuggestion()
+    return mostProbableDiagnosis(symptoms).getSuggestion()
+
+
 #Check if we need any more information
 def checkInformationIntegrity(message_key_words):
     for key_word in message_key_words:
         if key_word == "appointment":
 
+def testInitializeDiagnosisList():
+    diagnosis = Diagnosis()
