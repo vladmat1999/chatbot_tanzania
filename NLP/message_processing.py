@@ -47,13 +47,14 @@ def informationRequestedFromUser():
 def getRequestedInformation(message, information, event):
     return 0
 
-def makeSuggestion(symptoms):
+
+def mostProbableDiagnosys(symptoms):
     for diagnosys in diagnosys_list:
         counter = 0
         for symptom in symptoms:
             if symptom in diagnosys.getSymtoms():
                 counter += 1
-        diagnosys.setMatch(counter / diagnosys_list.getSymtoms() * 100)
+        diagnosys.setMatch(counter / len(diagnosys_list.getSymtoms()) * 100)
 
     most_probable_diagnosys = diagnosys_list[0]
 
@@ -61,4 +62,8 @@ def makeSuggestion(symptoms):
         if most_probable_diagnosys.getMatch() < diagnosys.getMatch():
             most_probable_diagnosys = diagnosys
 
-    return most_probable_diagnosys.getSuggestion()
+    return most_probable_diagnosys
+
+
+def makeSuggestion(symptoms):
+    return mostProbableDiagnosys(symptoms).getSuggestion()
