@@ -1,10 +1,11 @@
 from dateutil.parser import parse
 from Diagnosis import Diagnosis
 important_words = ["appointment", "check medicine", ""]
-diagnosis_list = testInitializeDiagnosisList()
+diagnosis_list = []
+
 
 # Returns a list with the keywords found in the message
-def findKeyWords(message, key_words):
+def find_key_words(message, key_words):
     message_words = message.split()
     message_key_words = []
     for key_word in key_words:
@@ -13,23 +14,24 @@ def findKeyWords(message, key_words):
                 message_key_words.append(key_word.lower())
     return message_key_words
 
-#Analyze the main keyword of the message
-def analyzeKeyWords(message_kew_words):
+
+# Analyze the main keyword of the message
+def analyze_key_words(message_kew_words):
     for key_word in message_kew_words:
         if key_word in important_words:
-            makeAnswer(key_word)
+            make_answer(key_word)
             break
 
 
-
 # Returns a string representing an answer to the message
-def makeAnswer(message, user):
-    symptoms = findKeyWords(message, symptomList)
-    answer_message = makeSuggestion(symptoms)
-    return ""
+def make_answer(message, user):
+    symptoms = find_key_words(message, ["s1", "s2", "s3", "s4"])
+    answer_message = make_suggestion(symptoms)
+    return answer_message
+
 
 # Makes a request to receive some data about an event
-def askForInformation(information, event):
+def ask_for_information(information, event):
     information_requested = information.lower()
     request_information_message = "Could you tell me "
 
@@ -52,41 +54,51 @@ def askForInformation(information, event):
 
 
 # Checks if a request for information was made
-def informationRequestedFromUser():
+def information_requested_from_user():
     return 0
 
 
 # Uses some information to update the user
-def getRequestedInformation(message, information, event):
+def get_requested_information(message, information, event):
     return 0
 
 
-def mostProbableDiagnosis(symptoms):
+def most_probable_diagnosis(symptoms):
     global diagnosis_list
-    for diagnosis in diagnosis_list:
-        counter = 0
-        for symptom in symptoms:
-            if symptom in diagnosis.getSymtoms():
-                counter += 1
-        diagnosis.setMatch(counter / len(diagnosis_list.getSymtoms()) * 100)
+    test_initialize_diagnosis_list()
 
-    most_probable_diagnosis = diagnosis_list[0]
+    mpd = diagnosis_list[0]
 
     for diagnosis in diagnosis_list:
-        if most_probable_diagnosis.getMatch() < diagnosis.getMatch():
-            most_probable_diagnosis = diagnosis
+        if mpd.probability(symptoms) < diagnosis.probability(symptoms):
+            mpd = diagnosis
 
-    return most_probable_diagnosis
-
-
-def makeSuggestion(symptoms):
-    return mostProbableDiagnosis(symptoms).getSuggestion()
+    return mpd
 
 
-#Check if we need any more information
-def checkInformationIntegrity(message_key_words):
+def make_suggestion(symptoms):
+    return most_probable_diagnosis(symptoms).getSuggestion()
+
+
+# Check if we need any more information
+def check_information_integrity(message_key_words):
     for key_word in message_key_words:
         if key_word == "appointment":
+            return 0
 
-def testInitializeDiagnosisList():
-    diagnosis = Diagnosis()
+
+def test_initialize_diagnosis_list():
+    global diagnosis_list
+    diagnosis = Diagnosis("D1", ["s1", "s4"], "suggestion1")
+    diagnosis_list.append(diagnosis)
+
+    diagnosis = Diagnosis("D2", ["s1", "s3"], "suggestion2")
+    diagnosis_list.append(diagnosis)
+
+    diagnosis = Diagnosis("D2", ["s4", "s2", "s3"], "suggestion3")
+    diagnosis_list.append(diagnosis)
+
+
+if __name__ == "__main__":
+    print(make_answer("I sometimes fell odd and i have s1 s3 last night", 0))
+    print(make_answer("Today i have seen that my heat s2 and s3", 0))
