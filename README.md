@@ -9,6 +9,5 @@ pip3 install fbchat
 
 in caz ca nu merge. Documentatia si exemplele le gasiti aici: https://fbchat.readthedocs.io/en/master/api.html
 
-Cosmin care se ocupa de send/receive sper sa inteleaga ceva.
 
 Emailul si parola de la cont sunt in chat_bot.py, dar daca testati recomand sa va faceti un cont temporar ca sa nu va incurcati intre voi cand dati mesaje
