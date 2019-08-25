@@ -1,0 +1,1 @@
+Here is a proof of concept engine and the database functions which should be used in the final project. The comments are in Romania, as we didn't had a foreign member in our team and decided that the documentation would be easier to read. 
